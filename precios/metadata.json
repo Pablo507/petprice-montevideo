@@ -1,0 +1,7 @@
+{
+  "name": "MonteCompare - Comparador de Precios Montevideo",
+  "description": "Una aplicación avanzada para comparar precios entre comercios físicos y online en Montevideo, Uruguay, utilizando inteligencia artificial para búsqueda en tiempo real.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
