@@ -6,13 +6,21 @@ import localData from "../petprice_data.json";
 // ---------------------------------------------------------------------------
 // Configuración - EXCLUSIVA PARA GROQ CLOUD
 // ---------------------------------------------------------------------------
-// Ahora usamos la API Key real de Groq y su URL oficial
-const GROQ_API_KEY = (import.meta as any).env?.VITE_GROQ_API_KEY;
+const getGroqClient = () => {
+  const GROQ_API_KEY = (import.meta as any).env?.VITE_GROQ_API_KEY || (process as any).env?.VITE_GROQ_API_KEY;
 
-const groq = new Groq({
-  apiKey: GROQ_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
+  if (!GROQ_API_KEY) {
+    console.warn("GROQ_API_KEY no encontrada. La IA estará desactivada.");
+    return null;
+  }
+
+  return new Groq({
+    apiKey: GROQ_API_KEY,
+    dangerouslyAllowBrowser: true,
+  });
+};
+
+const groq = getGroqClient();
 
 // ---------------------------------------------------------------------------
 // Búsqueda Local (Se mantiene para resultados instantáneos)
@@ -51,6 +59,10 @@ export const searchPricesInMontevideo = async (query: string): Promise<Compariso
   const localResults = searchLocalData(query);
 
   try {
+    if (!groq) {
+      throw new Error("Cliente Groq no inicializado (falta API Key)");
+    }
+
     const chatCompletion = await groq.chat.completions.create({
       messages: [
         { role: "system", content: SYSTEM_INSTRUCTION(query) },
