@@ -23,19 +23,13 @@ export function parseWeightTérminos(query: string): string[] {
     const terms: string[] = [];
 
     // Busca patrones como "1.5kg", "1,5 kg", "500g"
-    const weightRegex = /(\d+[.,]?\d*)\s*(kg|g|kilogramos|gramos|k)/g;
+    const weightRegex = /(\d+[.,]?\d*)\s*(kg|g|kilogramos|gramos|k)/gi;
     let match;
     while ((match = weightRegex.exec(normalized)) !== null) {
-        let value = match[1].replace(",", "."); // Normalizar a 1.5
-        const unit = match[2];
-
-        if (unit === "g" || unit === "gramos") {
-            // Convertir gramos a kg para consistencia si es necesario, 
-            // pero para búsqueda texto usualmente es mejor mantenerlo como string
-            terms.push(value);
-        } else {
-            terms.push(value);
-        }
+        let value = match[1].replace(",", ".");
+        terms.push(value);
+        // También agregamos la forma completa (ej: "1.5kg") para saltarla en las keywords
+        terms.push(match[0].replace(/\s+/g, ""));
     }
 
     // También extrae números sueltos que podrían ser pesos
@@ -63,9 +57,11 @@ export function searchLocalProducts(query: string): PriceResult[] {
         let matchesAllWords = true;
 
         // 1. Verificación de palabras clave (Marca, tipos, etc)
+        const commonUnits = ["kg", "g", "k", "kilogramos", "gramos", "unidades", "und"];
+
         for (const word of queryWords) {
-            // Saltamos términos de peso ya procesados si son puramente numéricos
-            if (weightTerms.includes(word)) continue;
+            // Saltamos términos de peso y unidades ruidosas
+            if (weightTerms.includes(word) || commonUnits.includes(word)) continue;
 
             if (productName.includes(word) || source.includes(word)) {
                 score += 10;
