@@ -180,6 +180,31 @@ const App: React.FC = () => {
                 </div>
               ))}
             </div>
+
+            {/* Fallback de búsqueda en tiendas */}
+            <div className="pt-12 border-t border-slate-200">
+              <h3 className="text-xl font-black text-slate-800 mb-6 text-center">¿No encuentras lo que buscas? Busca directamente en las tiendas:</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  { name: 'Tu Ración', logo: Globe },
+                  { name: 'DogCenter', logo: Store },
+                  { name: 'Tienda Inglesa', logo: ShoppingCart },
+                  { name: 'Mundo Mascota', logo: Globe },
+                  { name: 'TatuPet', logo: ShoppingCart }
+                ].map((shop) => (
+                  <a
+                    key={shop.name}
+                    href={generateSearchUrl(shop.name, query)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-bold text-slate-600 hover:border-orange-500 hover:text-orange-600 transition-all shadow-sm"
+                  >
+                    <shop.logo className="w-4 h-4" />
+                    {shop.name}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="bg-white rounded-[2.5rem] p-20 shadow-2xl border border-slate-100 text-center max-w-2xl mx-auto">
