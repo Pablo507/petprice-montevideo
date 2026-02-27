@@ -66,7 +66,7 @@ const STORE_PATTERNS: StoreUrlPattern[] = [
     {
         name: "Laika",
         aliases: ["laika", "laika mascotas"],
-        buildUrl: (q) => `https://laika.com.uy/search?q=${encodeURIComponent(q)}`,
+        buildUrl: (q) => `https://www.laika.com.uy/catalogo?q=${encodeURIComponent(q)}`,
     },
     {
         name: "Forever Pets",
