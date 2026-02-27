@@ -859,5 +859,54 @@
     "Price_Actual_UYU": "2805.0",
     "Weight_kg": "20.0",
     "Precio_Por_Kilo": "140.25"
+  },
+  {
+    "Source": "Laika",
+    "Product_Name": "Frost Adult Light - All Breeds",
+    "Price_Actual_UYU": "2922",
+    "Weight_kg": "15",
+    "Precio_Por_Kilo": "194.80"
+  },
+  {
+    "Source": "Laika",
+    "Product_Name": "Frost Technical - All Breeds",
+    "Price_Actual_UYU": "3290",
+    "Weight_kg": "15",
+    "Precio_Por_Kilo": "219.33"
+  },
+  {
+    "Source": "Devoto",
+    "Product_Name": "Alimento NERO perros adultos",
+    "Price_Actual_UYU": "1990",
+    "Weight_kg": "20",
+    "Precio_Por_Kilo": "99.50"
+  },
+  {
+    "Source": "Devoto",
+    "Product_Name": "Alimento LAGER Perro Adulto",
+    "Price_Actual_UYU": "2100",
+    "Weight_kg": "25",
+    "Precio_Por_Kilo": "84.00"
+  },
+  {
+    "Source": "Forever Pets",
+    "Product_Name": "Three Dogs Super Premium Perro Adulto",
+    "Price_Actual_UYU": "2990",
+    "Weight_kg": "17",
+    "Precio_Por_Kilo": "175.88"
+  },
+  {
+    "Source": "Forever Pets",
+    "Product_Name": "Biofresh Gatos Castrados Salmón",
+    "Price_Actual_UYU": "4250",
+    "Weight_kg": "7.5",
+    "Precio_Por_Kilo": "566.67"
+  },
+  {
+    "Source": "Mercado Libre",
+    "Product_Name": "Frost Adulto Raza Pequeña",
+    "Price_Actual_UYU": "3300",
+    "Weight_kg": "15",
+    "Precio_Por_Kilo": "220.00"
   }
 ]
