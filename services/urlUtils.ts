@@ -16,7 +16,7 @@ const STORE_PATTERNS: StoreUrlPattern[] = [
     {
         name: "TuRación",
         aliases: ["turacion", "tu racion"],
-        buildUrl: (q) => `https://turacion.com/?s=${encodeURIComponent(q)}&post_type=product`,
+        buildUrl: (q) => `https://turacion.com/search?q=${encodeURIComponent(q)}`,
     },
     {
         name: "Pet.uy",
@@ -82,7 +82,12 @@ const STORE_PATTERNS: StoreUrlPattern[] = [
 function sanitizeQuery(query: string): string {
     return query
         .toLowerCase()
+        // Optimización: Muchos motores de búsqueda internos (WooCommerce/PrestaShop) 
+        // confunden "1.5 kg" con "15 kg" o dan resultados menos exactos.
+        // "1.5kg" es un token más preciso.
+        .replace(/(\d+[,.]?\d*)\s*(kg|g|kilogramos|gramos|k|lb|lbs)\b/gi, "$1$2")
         .replace(/(precio|oferta|stock|uruguay|montevideo|disponible|comprar)/g, "")
+        .replace(/\s+/g, " ")
         .trim();
 }
 
@@ -93,8 +98,8 @@ function normalizeStoreName(name: string): string {
     return name
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "") 
-        .replace(/[^a-z0-9]/g, ""); 
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "");
 }
 
 /**
