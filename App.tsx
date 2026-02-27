@@ -20,45 +20,10 @@ const App: React.FC = () => {
 
     setLoading(true);
     setError(null);
-    
+
     try {
-      // 1. Llamada a la IA (Gemini)
+      // Llamada a la IA y Búsqueda Local Unificada
       const results = await searchPricesInMontevideo(query);
-
-      // 2. INTEGRACIÓN LOCAL OPTIMIZADA (Fix para "Frost 1.5 kg")
-      const q = query.toLowerCase().trim();
-      const queryWords = q.split(' ').filter(word => word.length > 0);
-      
-      const matchedLocal = localData.filter((item: any) => {
-        const productName = item.Product_Name.toLowerCase();
-        const storeName = item.Source.toLowerCase();
-        // Verifica que TODAS las palabras buscadas existan en el nombre o la tienda
-        return queryWords.every(word => productName.includes(word) || storeName.includes(word));
-      }).map((item: any) => ({
-        storeName: item.Source,
-        productName: item.Product_Name,
-        price: parseFloat(item.Price_Actual_UYU),
-        currency: '$U',
-        isOnline: true,
-        // Detecta si es físico basado en la tienda
-        isPhysical: /tienda inglesa|disco|devoto|mundo mascota/i.test(item.Source),
-        lastUpdated: '15 Feb 2026',
-        // USA LA UTILIDAD PARA EVITAR 404
-        link: generateSearchUrl(item.Source, item.Product_Name),
-        location: 'Montevideo'
-      }));
-
-      // Fusionar resultados priorizando locales si hay coincidencia exacta
-      if (matchedLocal.length > 0) {
-        // Filtramos duplicados que la IA podría haber traído de la misma tienda
-        const aiResults = results.results.filter(aiItem => 
-          !matchedLocal.some(localItem => 
-            localItem.storeName === aiItem.storeName && 
-            localItem.productName.toLowerCase().includes(queryWords[0])
-          )
-        );
-        results.results = [...matchedLocal, ...aiResults];
-      }
 
       setData(results);
     } catch (err) {
@@ -109,7 +74,7 @@ const App: React.FC = () => {
           <h1 className="text-4xl sm:text-5xl font-black text-slate-900 mb-6 tracking-tight">
             Tus compras en Montevideo, <span className="text-violet-600">inteligentes.</span>
           </h1>
-          
+
           <form onSubmit={handleSearch} className="relative group max-w-2xl mx-auto">
             <input
               type="text"

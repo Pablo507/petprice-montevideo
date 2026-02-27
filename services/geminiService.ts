@@ -22,30 +22,7 @@ const getGroqClient = () => {
 
 const groq = getGroqClient();
 
-// ---------------------------------------------------------------------------
-// Búsqueda Local (Se mantiene para resultados instantáneos)
-// ---------------------------------------------------------------------------
-function searchLocalData(query: string): PriceResult[] {
-  const queryWords = query.toLowerCase().split(/\s+/).filter(w => w.length > 2);
-  if (queryWords.length === 0) return [];
-
-  return (localData as any[])
-    .filter(item => {
-      const productName = (item.Product_Name || "").toLowerCase();
-      return queryWords.every(word => productName.includes(word));
-    })
-    .map(item => ({
-      storeName: item.Source,
-      productName: item.Product_Name,
-      price: Number(item.Price_Actual_UYU),
-      currency: "UYU",
-      isOnline: true,
-      isPhysical: ["Tienda Inglesa", "Disco", "Devoto"].includes(item.Source),
-      packageSize: item.Weight_kg ? `${item.Weight_kg}kg` : undefined,
-      lastUpdated: "Confirmado 2026",
-      link: generateSearchUrl(item.Source, query)
-    }));
-}
+import { searchLocalProducts } from "./searchUtils";
 
 const SYSTEM_INSTRUCTION = (query: string) =>
   `Eres un experto en precios de mascotas en Montevideo. Analiza "${query}". 
@@ -56,7 +33,7 @@ Solo usa datos reales. Responde estrictamente en JSON:
 // Función Principal
 // ---------------------------------------------------------------------------
 export const searchPricesInMontevideo = async (query: string): Promise<ComparisonData> => {
-  const localResults = searchLocalData(query);
+  const localResults = searchLocalProducts(query);
 
   try {
     if (!groq) {
