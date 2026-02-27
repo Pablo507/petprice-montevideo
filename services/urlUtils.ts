@@ -72,6 +72,11 @@ const STORE_PATTERNS: StoreUrlPattern[] = [
         name: "Forever Pets",
         aliases: ["foreverpets", "forever pets"],
         buildUrl: (q) => `https://www.foreverpetsuy.com/search-results?q=${encodeURIComponent(q)}`,
+    },
+    {
+        name: "Ciudad Aventura",
+        aliases: ["ciudadaventura", "ciudad aventura"],
+        buildUrl: (q) => `https://ciudadaventura.com.uy/?s=${encodeURIComponent(q)}&post_type=product&dgwt_wcas=1`,
     }
 ];
 
