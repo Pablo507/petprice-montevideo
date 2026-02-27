@@ -83,10 +83,10 @@ export function searchLocalProducts(query: string): PriceResult[] {
             if (hasWeightMatch) {
                 score += 50; // Alta prioridad a coincidencia de peso
             } else {
-                // Si el usuario especificó un peso y no coincide, bajamos mucho la relevancia
-                // o incluso lo descartamos si queremos ser muy estrictos.
-                score -= 20;
-                // matchesAllWords = false; // Descomentar si queremos ser estrictos
+                // Si el usuario especificó un peso y no coincide, bajamos levemente la relevancia.
+                // Usamos -5 en lugar de -20 para que los resultados de la marca (score 10)
+                // sigan apareciendo si no existe el peso exacto.
+                score -= 5;
             }
         }
 
