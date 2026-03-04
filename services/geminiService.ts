@@ -25,7 +25,7 @@ const groq = getGroqClient();
 import { searchLocalProducts } from "./searchUtils";
 
 const SYSTEM_INSTRUCTION = (query: string) =>
-  `Eres un experto en precios de mascotas en Montevideo. Analiza "${query}". 
+  `Eres un experto en precios de productos para mascotas (alimento y accesorios) en Montevideo. Analiza "${query}". 
 Solo usa datos reales. Responde estrictamente en JSON:
 {"results":[{"storeName":"X","productName":"Y","price":123,"currency":"UYU","isOnline":true,"isPhysical":false,"lastUpdated":"2026"}],"analysis":"..."}`;
 

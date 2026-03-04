@@ -150,35 +150,43 @@ const App: React.FC = () => {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredResults.map((item, idx) => (
-                <div key={idx} className="bg-white border-2 border-slate-100 rounded-3xl p-6 hover:border-violet-200 transition-all flex flex-col justify-between group">
-                  <div>
-                    <span className={`text-[10px] uppercase tracking-widest font-black px-3 py-1.5 rounded-xl ${item.isOnline && !item.isPhysical ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}>
-                      {item.isOnline && !item.isPhysical ? 'DIGITAL' : 'PRESENCIAL'}
-                    </span>
-                    <div className="mt-4 mb-4">
-                      <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">{item.storeName}</h3>
-                      <p className="text-xl font-black text-slate-900 tracking-tight group-hover:text-violet-600 transition-colors">
-                        {item.productName}
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between mb-6 pt-2 border-t border-slate-50">
-                      <span className="text-3xl font-black text-slate-900">
-                        <span className="text-violet-600 text-xl mr-1">{item.currency}</span>
-                        {item.price.toLocaleString('es-UY')}
+              {filteredResults.length > 0 ? (
+                filteredResults.map((item, idx) => (
+                  <div key={idx} className="bg-white border-2 border-slate-100 rounded-3xl p-6 hover:border-violet-200 transition-all flex flex-col justify-between group">
+                    <div>
+                      <span className={`text-[10px] uppercase tracking-widest font-black px-3 py-1.5 rounded-xl ${item.isOnline && !item.isPhysical ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                        {item.isOnline && !item.isPhysical ? 'DIGITAL' : 'PRESENCIAL'}
                       </span>
+                      <div className="mt-4 mb-4">
+                        <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest">{item.storeName}</h3>
+                        <p className="text-xl font-black text-slate-900 tracking-tight group-hover:text-violet-600 transition-colors">
+                          {item.productName}
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between mb-6 pt-2 border-t border-slate-50">
+                        <span className="text-3xl font-black text-slate-900">
+                          <span className="text-violet-600 text-xl mr-1">{item.currency}</span>
+                          {item.price.toLocaleString('es-UY')}
+                        </span>
+                      </div>
                     </div>
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-3 w-full py-4 bg-slate-900 hover:bg-violet-600 text-white rounded-2xl text-sm font-black transition-all"
+                    >
+                      Ir a la tienda <ExternalLink className="w-4 h-4" />
+                    </a>
                   </div>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full py-4 bg-slate-900 hover:bg-violet-600 text-white rounded-2xl text-sm font-black transition-all"
-                  >
-                    Ir a la tienda <ExternalLink className="w-4 h-4" />
-                  </a>
+                ))
+              ) : (
+                <div className="col-span-full bg-white border-2 border-dashed border-slate-200 rounded-[2rem] p-12 text-center">
+                  <Info className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                  <p className="text-slate-500 font-bold">No encontramos precios exactos registrados para este producto en 2026.</p>
+                  <p className="text-slate-400 text-sm mt-2">Prueba buscando directamente en nuestras tiendas oficiales abajo.</p>
                 </div>
-              ))}
+              )}
             </div>
 
             {/* Fallback de búsqueda en tiendas */}

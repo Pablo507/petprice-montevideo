@@ -151,7 +151,7 @@ export function generateSearchUrl(storeName: string, query: string): string {
  * Categories that specific stores are known NOT to carry.
  */
 const STORE_CATEGORY_EXCLUSIONS: Record<string, string[]> = {
-    petuy: ["juguete", "juguetes", "cama", "camas", "ropa", "collar", "correa", "transportador"],
+    petuy: ["juguete", "juguetes", "cama", "camas", "ropa", "transportador"],
     dogcenter: ["juguete", "juguetes", "ropa", "cama"],
 };
 
