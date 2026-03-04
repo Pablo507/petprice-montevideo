@@ -90,7 +90,7 @@ function sanitizeQuery(query: string): string {
         // Optimización: Muchos motores de búsqueda internos (WooCommerce/PrestaShop) 
         // confunden "1.5 kg" con "15 kg" o dan resultados menos exactos.
         // "1.5kg" es un token más preciso.
-        .replace(/(\d+[,.]?\d*)\s*(kg|g|kilogramos|gramos|k|lb|lbs)\b/gi, "$1$2")
+        .replace(/(\d+[,.]?\d*)\s*(kg|g|kilogramos|gramos|k|lb|lbs)\b/gi, "$1 $2")
         .replace(/(precio|oferta|stock|uruguay|montevideo|disponible|comprar)/g, "")
         .replace(/\s+/g, " ")
         .trim();
