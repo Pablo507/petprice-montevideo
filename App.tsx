@@ -189,6 +189,8 @@ const App: React.FC = () => {
                   { name: 'Tu Ración', logo: Globe },
                   { name: 'DogCenter', logo: Store },
                   { name: 'Tienda Inglesa', logo: ShoppingCart },
+                  { name: 'Geant', logo: ShoppingCart },
+                  { name: 'Disco', logo: ShoppingCart },
                   { name: 'Mundo Mascota', logo: Globe },
                   { name: 'TatuPet', logo: ShoppingCart }
                 ].map((shop) => (

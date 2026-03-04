@@ -46,7 +46,7 @@ const STORE_PATTERNS: StoreUrlPattern[] = [
     {
         name: "Tienda Inglesa",
         aliases: ["tiendainglesa", "tienda inglesa"],
-        buildUrl: (q) => `https://www.tiendainglesa.com.uy/busqueda?0,0,${encodeURIComponent(q)},0`,
+        buildUrl: (q) => `https://www.tiendainglesa.com.uy/supermercado/busqueda?0,0,${encodeURIComponent(q)},0`,
     },
     {
         name: "Mercado Libre",
@@ -56,12 +56,32 @@ const STORE_PATTERNS: StoreUrlPattern[] = [
     {
         name: "Disco",
         aliases: ["disco", "supermercado disco"],
-        buildUrl: (q) => `https://www.disco.com.uy/${encodeURIComponent(q)}?_q=${encodeURIComponent(q)}&map=ft`,
+        buildUrl: (q) => `https://www.disco.com.uy/productos/keyword/${encodeURIComponent(q)}`,
+    },
+    {
+        name: "Geant",
+        aliases: ["geant"],
+        buildUrl: (q) => `https://www.geant.com.uy/productos/keyword/${encodeURIComponent(q)}`,
     },
     {
         name: "Devoto",
         aliases: ["devoto", "supermercado devoto"],
-        buildUrl: (q) => `https://www.devoto.com.uy/${encodeURIComponent(q)}?_q=${encodeURIComponent(q)}&map=ft`,
+        buildUrl: (q) => `https://www.devoto.com.uy/productos/keyword/${encodeURIComponent(q)}`,
+    },
+    {
+        name: "Punto Mascota",
+        aliases: ["puntomascota", "punto mascota"],
+        buildUrl: (q) => `https://www.puntomascota.com.uy/?s=${encodeURIComponent(q)}&post_type=product`,
+    },
+    {
+        name: "Hocicos",
+        aliases: ["hocicos"],
+        buildUrl: (q) => `https://hocicos.com.uy/?s=${encodeURIComponent(q)}&post_type=product`,
+    },
+    {
+        name: "La Mascoteria",
+        aliases: ["lamascoteria", "la mascoteria"],
+        buildUrl: (q) => `https://lamascoteria.com.uy/?s=${encodeURIComponent(q)}&post_type=product`,
     },
     {
         name: "Laika",
