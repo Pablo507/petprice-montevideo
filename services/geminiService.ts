@@ -65,7 +65,7 @@ export const searchPricesInMontevideo = async (query: string): Promise<Compariso
         .map((r: any) => ({
           ...r,
           price: Number(r.price),
-          link: generateSearchUrl(r.storeName, query)
+          link: generateSearchUrl(r.storeName, r.productName)
         }));
     }
 

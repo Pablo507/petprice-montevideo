@@ -111,6 +111,6 @@ export function searchLocalProducts(query: string): PriceResult[] {
             isPhysical: ["Tienda Inglesa", "Disco", "Devoto", "Mundo Mascota"].includes(r.item.Source),
             packageSize: r.item.Weight_kg ? `${r.item.Weight_kg}kg` : undefined,
             lastUpdated: "Confirmado 2026",
-            link: generateSearchUrl(r.item.Source, query)
+            link: generateSearchUrl(r.item.Source, r.item.Product_Name)
         }));
 }
